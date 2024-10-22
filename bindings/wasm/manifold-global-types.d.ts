@@ -20,8 +20,8 @@ export interface SealedFloat32Array<N extends number> extends Float32Array {
   length: N;
 }
 
-export type Vec2 = [number, number];
-export type Vec3 = [number, number, number];
+export type Vec2 = { x: number, y: number };
+export type Vec3 = { x: number, y: number, z: number };
 // 3x3 matrix stored in column-major order
 export type Mat3 = [
   number,
@@ -54,7 +54,7 @@ export type Mat4 = [
   number,
 ];
 export type SimplePolygon = Vec2[];
-export type Polygons = SimplePolygon|SimplePolygon[];
+export type Polygons = SimplePolygon | SimplePolygon[];
 export type Rect = {
   min: Vec2,
   max: Vec2
@@ -71,5 +71,5 @@ export type Properties = {
   surfaceArea: number,
   volume: number
 };
-export type FillRule = 'EvenOdd'|'NonZero'|'Positive'|'Negative'
-export type JoinType = 'Square'|'Round'|'Miter'
+export type FillRule = 'EvenOdd' | 'NonZero' | 'Positive' | 'Negative'
+export type JoinType = 'Square' | 'Round' | 'Miter'

@@ -18,7 +18,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elalish/manifold.git"
+    "url": "git+https://github.com/inventables/manifold.git"
   },
   "keywords": [
     "3D",

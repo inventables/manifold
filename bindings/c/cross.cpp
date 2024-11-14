@@ -203,9 +203,9 @@ ManifoldCrossSection *manifold_cross_section_simplify(void *mem,
 
 ManifoldCrossSection *manifold_cross_section_offset(
     void *mem, ManifoldCrossSection *cs, double delta, ManifoldJoinType jt,
-    double miter_limit, int circular_segments) {
-  auto offset =
-      from_c(cs)->Offset(delta, from_c(jt), miter_limit, circular_segments);
+    ManifoldEndType et, double miter_limit, int circular_segments) {
+  auto offset = from_c(cs)->Offset(delta, from_c(jt), from_c(et), miter_limit,
+                                   circular_segments);
   return to_c(new (mem) CrossSection(offset));
 }
 

@@ -152,11 +152,16 @@ CrossSection Warp(CrossSection& cross_section, uintptr_t funcPtr) {
 }
 
 CrossSection Offset(CrossSection& cross_section, double delta, int join_type,
-                    double miter_limit, double arc_tolerance) {
+                    int end_type, double miter_limit, double arc_tolerance) {
   auto jt = join_type == 0   ? CrossSection::JoinType::Square
             : join_type == 1 ? CrossSection::JoinType::Round
                              : CrossSection::JoinType::Miter;
-  return cross_section.Offset(delta, jt, miter_limit, arc_tolerance);
+  auto et = end_type == 0   ? CrossSection::EndType::Polygon
+            : end_type == 1 ? CrossSection::EndType::Joined
+            : end_type == 2 ? CrossSection::EndType::Butt
+            : end_type == 3 ? CrossSection::EndType::Square
+                            : CrossSection::EndType::Round;
+  return cross_section.Offset(delta, jt, et, miter_limit, arc_tolerance);
 }
 
 void CollectVertices(std::vector<vec2>& verts, const CrossSection& cs) {

@@ -82,6 +82,27 @@ C2::JoinType jt(CrossSection::JoinType jointype) {
   return jt;
 }
 
+C2::EndType et(CrossSection::EndType endtype) {
+  C2::EndType et = C2::EndType::Polygon;
+  switch (endtype) {
+    case CrossSection::EndType::Polygon:
+      break;
+    case CrossSection::EndType::Joined:
+      et = C2::EndType::Joined;
+      break;
+    case CrossSection::EndType::Butt:
+      et = C2::EndType::Butt;
+      break;
+    case CrossSection::EndType::Square:
+      et = C2::EndType::Square;
+      break;
+    case CrossSection::EndType::Round:
+      et = C2::EndType::Round;
+      break;
+  };
+  return et;
+}
+
 vec2 v2_of_pd(const C2::PointD p) { return {p.x, p.y}; }
 
 C2::PointD v2_to_pd(const vec2 v) { return C2::PointD(v.x, v.y); }
@@ -654,7 +675,7 @@ CrossSection CrossSection::Simplify(double epsilon) const {
  * defaults according to the radius.
  */
 CrossSection CrossSection::Offset(double delta, JoinType jointype,
-                                  double miter_limit,
+                                  EndType endtype, double miter_limit,
                                   int circularSegments) const {
   double arc_tol = 0.;
   if (jointype == JoinType::Round) {
@@ -667,9 +688,8 @@ CrossSection CrossSection::Offset(double delta, JoinType jointype,
     const double scaled_delta = abs_delta * std::pow(10, precision_);
     arc_tol = (std::cos(Clipper2Lib::PI / n) - 1) * -scaled_delta;
   }
-  auto ps =
-      C2::InflatePaths(GetPaths()->paths_, delta, jt(jointype),
-                       C2::EndType::Polygon, miter_limit, precision_, arc_tol);
+  auto ps = C2::InflatePaths(GetPaths()->paths_, delta, jt(jointype),
+                             et(endtype), miter_limit, precision_, arc_tol);
   return CrossSection(shared_paths(ps));
 }
 

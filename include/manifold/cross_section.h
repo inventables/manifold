@@ -136,8 +136,10 @@ class CrossSection {
   CrossSection Warp(std::function<void(vec2&)> warpFunc) const;
   CrossSection WarpBatch(std::function<void(VecView<vec2>)> warpFunc) const;
   CrossSection Simplify(double epsilon = 1e-6) const;
-  CrossSection Offset(double delta, JoinType jt, double miter_limit = 2.0,
-                      int circularSegments = 0) const;
+  enum class EndType { Polygon, Joined, Butt, Square, Round };
+
+  CrossSection Offset(double delta, JoinType jt, EndType et,
+                      double miter_limit = 2.0, int circularSegments = 0) const;
   ///@}
 
   /** @name Boolean

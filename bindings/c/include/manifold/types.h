@@ -108,3 +108,11 @@ typedef enum ManifoldJoinType {
 
 // function pointer
 typedef double (*ManifoldSdf)(double, double, double, void*);
+
+typedef enum ManifoldEndType {
+  MANIFOLD_END_TYPE_POLYGON,
+  MANIFOLD_END_TYPE_JOINED,
+  MANIFOLD_END_TYPE_BUTT,
+  MANIFOLD_END_TYPE_SQUARE,
+  MANIFOLD_END_TYPE_ROUND,
+} ManifoldEndType;

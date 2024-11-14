@@ -49,7 +49,8 @@ TEST(CrossSection, MirrorUnion) {
 TEST(CrossSection, RoundOffset) {
   auto a = CrossSection::Square({20., 20.}, true);
   int segments = 20;
-  auto rounded = a.Offset(5., CrossSection::JoinType::Round, 2, segments);
+  auto rounded = a.Offset(5., CrossSection::JoinType::Round,
+                          CrossSection::EndType::Polygon, 2, segments);
   auto result = Manifold::Extrude(rounded.ToPolygons(), 5.);
 
 #ifdef MANIFOLD_EXPORT

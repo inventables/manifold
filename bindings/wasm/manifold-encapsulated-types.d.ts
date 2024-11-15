@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Box, FillRule, JoinType, Mat3, Mat4, Polygons, Rect, SealedFloat32Array, SealedUint32Array, SimplePolygon, Smoothness, Vec2, Vec3} from './manifold-global-types';
+import { Box, FillRule, JoinType, EndType, Mat3, Mat4, Polygons, Rect, SealedFloat32Array, SealedUint32Array, SimplePolygon, Smoothness, Vec2, Vec3 } from './manifold-global-types';
 
 /**
  * Triangulates a set of /epsilon-valid polygons.
@@ -102,7 +102,7 @@ export class CrossSection {
    * @param size The X, and Y dimensions of the square.
    * @param center Set to true to shift the center to the origin.
    */
-  static square(size?: Vec2|number, center?: boolean): CrossSection;
+  static square(size?: Vec2 | number, center?: boolean): CrossSection;
 
   /**
    * Constructs a circle of a given radius.
@@ -132,8 +132,8 @@ export class CrossSection {
    * as opposed to resting on the XY plane as is default.
    */
   extrude(
-      height: number, nDivisions?: number, twistDegrees?: number,
-      scaleTop?: Vec2|number, center?: boolean): Manifold;
+    height: number, nDivisions?: number, twistDegrees?: number,
+    scaleTop?: Vec2 | number, center?: boolean): Manifold;
 
   /**
    * Constructs a manifold by revolving this cross-section around its Y-axis and
@@ -180,7 +180,7 @@ export class CrossSection {
    *
    * @param v The vector to multiply every vertex by per component.
    */
-  scale(v: Vec2|number): CrossSection;
+  scale(v: Vec2 | number): CrossSection;
 
 
   /**
@@ -224,8 +224,8 @@ export class CrossSection {
    * defaults according to the radius.
    */
   offset(
-      delta: number, joinType?: JoinType, miterLimit?: number,
-      circularSegments?: number): CrossSection;
+    delta: number, joinType?: JoinType, endType?: EndType, miterLimit?: number,
+    circularSegments?: number): CrossSection;
 
   /**
    * Remove vertices from the contours in this CrossSection that are less than
@@ -250,50 +250,50 @@ export class CrossSection {
   /**
    * Boolean union
    */
-  add(other: CrossSection|Polygons): CrossSection;
+  add(other: CrossSection | Polygons): CrossSection;
 
   /**
    * Boolean difference
    */
-  subtract(other: CrossSection|Polygons): CrossSection;
+  subtract(other: CrossSection | Polygons): CrossSection;
 
   /**
    * Boolean intersection
    */
-  intersect(other: CrossSection|Polygons): CrossSection;
+  intersect(other: CrossSection | Polygons): CrossSection;
 
   /**
    * Boolean union of the cross-sections a and b
    */
-  static union(a: CrossSection|Polygons, b: CrossSection|Polygons):
-      CrossSection;
+  static union(a: CrossSection | Polygons, b: CrossSection | Polygons):
+    CrossSection;
 
   /**
    * Boolean difference of the cross-section b from the cross-section a
    */
-  static difference(a: CrossSection|Polygons, b: CrossSection|Polygons):
-      CrossSection;
+  static difference(a: CrossSection | Polygons, b: CrossSection | Polygons):
+    CrossSection;
 
   /**
    * Boolean intersection of the cross-sections a and b
    */
-  static intersection(a: CrossSection|Polygons, b: CrossSection|Polygons):
-      CrossSection;
+  static intersection(a: CrossSection | Polygons, b: CrossSection | Polygons):
+    CrossSection;
 
   /**
    * Boolean union of a list of cross-sections
    */
-  static union(polygons: (CrossSection|Polygons)[]): CrossSection;
+  static union(polygons: (CrossSection | Polygons)[]): CrossSection;
 
   /**
    * Boolean difference of the tail of a list of cross-sections from its head
    */
-  static difference(polygons: (CrossSection|Polygons)[]): CrossSection;
+  static difference(polygons: (CrossSection | Polygons)[]): CrossSection;
 
   /**
    * Boolean intersection of a list of cross-sections
    */
-  static intersection(polygons: (CrossSection|Polygons)[]): CrossSection;
+  static intersection(polygons: (CrossSection | Polygons)[]): CrossSection;
 
   // Convex Hulls
 
@@ -305,7 +305,7 @@ export class CrossSection {
   /**
    * Compute the convex hull of all points in a list of polygons/cross-sections.
    */
-  static hull(polygons: (CrossSection|Polygons)[]): CrossSection;
+  static hull(polygons: (CrossSection | Polygons)[]): CrossSection;
 
   // Topological Operations
 
@@ -313,7 +313,7 @@ export class CrossSection {
    * Construct a CrossSection from a vector of other Polygons (batch
    * boolean union).
    */
-  static compose(polygons: (CrossSection|Polygons)[]): CrossSection;
+  static compose(polygons: (CrossSection | Polygons)[]): CrossSection;
 
   /**
    * This operation returns a vector of CrossSections that are topologically
@@ -433,7 +433,7 @@ export class Manifold {
    * @param size The X, Y, and Z dimensions of the box.
    * @param center Set to true to shift the center to the origin.
    */
-  static cube(size?: Vec3|number, center?: boolean): Manifold;
+  static cube(size?: Vec3 | number, center?: boolean): Manifold;
 
   /**
    * A convenience constructor for the common case of extruding a circle. Can
@@ -449,8 +449,8 @@ export class Manifold {
    * origin at the bottom.
    */
   static cylinder(
-      height: number, radiusLow: number, radiusHigh?: number,
-      circularSegments?: number, center?: boolean): Manifold;
+    height: number, radiusLow: number, radiusHigh?: number,
+    circularSegments?: number, center?: boolean): Manifold;
 
   /**
    * Constructs a geodesic sphere of a given radius.
@@ -485,9 +485,9 @@ export class Manifold {
    * as opposed to resting on the XY plane as is default.
    */
   static extrude(
-      polygons: CrossSection|Polygons, height: number, nDivisions?: number,
-      twistDegrees?: number, scaleTop?: Vec2|number,
-      center?: boolean): Manifold;
+    polygons: CrossSection | Polygons, height: number, nDivisions?: number,
+    twistDegrees?: number, scaleTop?: Vec2 | number,
+    center?: boolean): Manifold;
 
   /**
    * Constructs a manifold from a set of polygons/cross-section by revolving
@@ -502,8 +502,8 @@ export class Manifold {
    * @param revolveDegrees Number of degrees to revolve. Default is 360 degrees.
    */
   static revolve(
-      polygons: CrossSection|Polygons, circularSegments?: number,
-      revolveDegrees?: number): Manifold;
+    polygons: CrossSection | Polygons, circularSegments?: number,
+    revolveDegrees?: number): Manifold;
 
   // Mesh Conversion
 
@@ -575,8 +575,8 @@ export class Manifold {
    * will require more sdf evaluations per output vertex.
    */
   static levelSet(
-      sdf: (point: Vec3) => number, bounds: Box, edgeLength: number,
-      level?: number, tolerance?: number): Manifold;
+    sdf: (point: Vec3) => number, bounds: Box, edgeLength: number,
+    level?: number, tolerance?: number): Manifold;
 
   // Transformations
 
@@ -617,7 +617,7 @@ export class Manifold {
    *
    * @param v The vector to multiply every vertex by per component.
    */
-  scale(v: Vec3|number): Manifold;
+  scale(v: Vec3 | number): Manifold;
 
   /**
    * Mirror this Manifold over the plane described by the unit form of the given
@@ -721,9 +721,9 @@ export class Manifold {
    * @param propFunc A function that modifies the properties of a given vertex.
    */
   setProperties(
-      numProp: number,
-      propFunc: (newProp: number[], position: Vec3, oldProp: number[]) => void):
-      Manifold;
+    numProp: number,
+    propFunc: (newProp: number[], position: Vec3, oldProp: number[]) => void):
+    Manifold;
 
   /**
    * Curvature is the inverse of the radius of curvature, and signed such that
@@ -868,7 +868,7 @@ export class Manifold {
    * Compute the convex hull of all points contained within a set of Manifolds
    * and point vectors.
    */
-  static hull(points: (Manifold|Vec3)[]): Manifold;
+  static hull(points: (Manifold | Vec3)[]): Manifold;
 
   // Topological Operations
 

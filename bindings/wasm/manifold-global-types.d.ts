@@ -54,7 +54,7 @@ export type Mat4 = [
   number,
 ];
 export type SimplePolygon = Vec2[];
-export type Polygons = SimplePolygon|SimplePolygon[];
+export type Polygons = SimplePolygon | SimplePolygon[];
 export type Rect = {
   min: Vec2,
   max: Vec2
@@ -71,5 +71,6 @@ export type Properties = {
   surfaceArea: number,
   volume: number
 };
-export type FillRule = 'EvenOdd'|'NonZero'|'Positive'|'Negative'
-export type JoinType = 'Square'|'Round'|'Miter'
+export type FillRule = 'EvenOdd' | 'NonZero' | 'Positive' | 'Negative'
+export type JoinType = 'Square' | 'Round' | 'Miter'
+export type EndType = 'Polygon' | 'Square' | 'Round' | 'Butt' | 'Joined'

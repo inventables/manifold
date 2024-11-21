@@ -112,7 +112,7 @@ if(MANIFOLD_CROSS_SECTION)
     FetchContent_Declare(
       Clipper2
       GIT_REPOSITORY https://github.com/AngusJohnson/Clipper2.git
-      GIT_TAG ff378668baae3570e9d8070aa9eb339bdd5a6aba
+      GIT_TAG ed98928c66707988d4eb2c49a31c41380a08931c
       GIT_PROGRESS TRUE
       SOURCE_SUBDIR CPP
       EXCLUDE_FROM_ALL

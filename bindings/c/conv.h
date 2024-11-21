@@ -52,6 +52,7 @@ const manifold::MeshGL64 *from_c(ManifoldMeshGL64 *m);
 OpType from_c(ManifoldOpType op);
 CrossSection::FillRule from_c(ManifoldFillRule fillrule);
 CrossSection::JoinType from_c(ManifoldJoinType jt);
+CrossSection::EndType from_c(ManifoldEndType et);
 const manifold::Box *from_c(ManifoldBox *m);
 const manifold::Rect *from_c(ManifoldRect *r);
 vec2 from_c(ManifoldVec2 v);

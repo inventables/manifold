@@ -19,7 +19,7 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
 
     - name: Download built examples
-      uses: dawidd6/action-download-artifact@v3
+      uses: dawidd6/action-download-artifact@v6
       with:
         workflow: manifold.yml
         workflow_conclusion: completed

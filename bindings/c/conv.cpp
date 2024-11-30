@@ -200,6 +200,27 @@ CrossSection::JoinType from_c(ManifoldJoinType join_type) {
   return jt;
 }
 
+CrossSection::EndType from_c(ManifoldEndType end_type) {
+  auto et = CrossSection::EndType::Polygon;
+  switch (end_type) {
+    case MANIFOLD_END_TYPE_POLYGON:
+      break;
+    case MANIFOLD_END_TYPE_JOINED:
+      et = CrossSection::EndType::Joined;
+      break;
+    case MANIFOLD_END_TYPE_BUTT:
+      et = CrossSection::EndType::Butt;
+      break;
+    case MANIFOLD_END_TYPE_SQUARE:
+      et = CrossSection::EndType::Square;
+      break;
+    case MANIFOLD_END_TYPE_ROUND:
+      et = CrossSection::EndType::Round;
+      break;
+  };
+  return et;
+}
+
 const manifold::Box *from_c(ManifoldBox *m) {
   return reinterpret_cast<manifold::Box const *>(m);
 }
